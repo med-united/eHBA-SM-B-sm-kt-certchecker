@@ -1,0 +1,229 @@
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" version="1.0">
+	<globalBindings localScoping="toplevel" />
+	<bindings schemaLocation="AMTS_Document_v1_6.xsd">
+		<schemaBindings>
+			<package name="ere.health.emp.bmp" />
+		</schemaBindings>
+		<bindings node="xs:element[@name='MP']">
+			<class name="MedikationsPlan" />
+			<bindings node="xs:complexType">
+				<bindings node="xs:sequence">
+					<bindings node="xs:element[@name='P']">
+						<property name="Patient" />
+						<bindings node="xs:complexType">
+							<class name="Patient" />
+							<bindings node="xs:attribute[@name='g']">
+								<property name="Vorname" />
+							</bindings>
+							<bindings node="xs:attribute[@name='f']">
+								<property name="Nachname" />
+							</bindings>
+							<bindings node="xs:attribute[@name='egk']">
+								<property name="VersichertenId" />
+							</bindings>
+							<bindings node="xs:attribute[@name='b']">
+								<property name="Geburtsdatum" />
+							</bindings>
+							<bindings node="xs:attribute[@name='s']">
+								<property name="Geschlecht" />
+							</bindings>
+							<bindings node="xs:attribute[@name='t']">
+								<property name="Titel" />
+							</bindings>
+							<bindings node="xs:attribute[@name='v']">
+								<property name="Vorsatzwort" />
+							</bindings>
+							<bindings node="xs:attribute[@name='z']">
+								<property name="Namenszusatz" />
+							</bindings>
+
+						</bindings>
+					</bindings>
+					<bindings node="xs:element[@name='A']">
+						<property name="Ersteller" />
+						<bindings node="xs:complexType">
+							<class name="Ersteller" />
+							<bindings node="xs:attribute[@name='lanr']">
+								<property name="LebenslangeArztnummer" />
+							</bindings>
+							<bindings node="xs:attribute[@name='idf']">
+								<property name="ApothkenIdentifikationsnummer" />
+							</bindings>
+							<bindings node="xs:attribute[@name='kik']">
+								<property name="KrankenhausInstitutionskennzeichen" />
+							</bindings>
+							<bindings node="xs:attribute[@name='n']">
+								<property name="Name" />
+							</bindings>
+							<bindings node="xs:attribute[@name='s']">
+								<property name="Strasse" />
+							</bindings>
+							<bindings node="xs:attribute[@name='z']">
+								<property name="Postleitzahl" />
+							</bindings>
+							<bindings node="xs:attribute[@name='c']">
+								<property name="Ort" />
+							</bindings>
+							<bindings node="xs:attribute[@name='p']">
+								<property name="Telefon" />
+							</bindings>
+							<bindings node="xs:attribute[@name='e']">
+								<property name="EMail" />
+							</bindings>
+							<bindings node="xs:attribute[@name='t']">
+								<property name="Erstelldatum" />
+							</bindings>
+						</bindings>
+					</bindings>
+					<bindings node="xs:element[@name='O']">
+						<property name="Parameter" />
+						<bindings node="xs:complexType">
+							<class name="Parameter" />
+							<bindings node="xs:attribute[@name='ai']">
+								<property name="AllergienUnvertraeglichkeiten" />
+							</bindings>
+							<bindings node="xs:attribute[@name='p']">
+								<property name="schwanger" />
+							</bindings>
+							<bindings node="xs:attribute[@name='b']">
+								<property name="stillend" />
+							</bindings>
+							<bindings node="xs:attribute[@name='w']">
+								<property name="Gewicht" />
+							</bindings>
+							<bindings node="xs:attribute[@name='h']">
+								<property name="Groesse" />
+							</bindings>
+							<bindings node="xs:attribute[@name='c']">
+								<property name="Kreatininwert" />
+							</bindings>
+							<bindings node="xs:attribute[@name='x']">
+								<property name="Parameterfreitext" />
+							</bindings>
+						</bindings>
+					</bindings>
+					<bindings node="xs:element[@name='S']">
+						<property name="Block" />
+						<bindings node="xs:complexType">
+							<class name="Block" />
+							<bindings node="xs:choice">
+								<property name="MedikationFreitextRezeptur" />
+								<bindings node="xs:element[@name='M']">
+									<bindings node="xs:complexType">
+										<class name="Medikation" />
+										<!-- <bindings node="xs:sequence/xs:element[@name='W']">
+											<property name="Wirkstoff" />
+											<bindings node="xs:complexType">
+												<class name="Wirkstoff" />
+												<bindings node="xs:attribute[@name='w']">
+													<property name="Wirkstoff" />
+												</bindings>
+												<bindings node="xs:attribute[@name='s']">
+													<property name="Wirkstaerke" />
+												</bindings>
+											</bindings>
+										</bindings> 
+										<bindings node="xs:attribute[@name='p']">
+											<property name="Pharmazentralnummer" />
+										</bindings>
+										<bindings node="xs:attribute[@name='a']">
+											<property name="Handelsname" />
+										</bindings>
+										<bindings node="xs:attribute[@name='f']">
+											<property name="DarreichungsformCode" />
+										</bindings>
+										<bindings node="xs:attribute[@name='fd']">
+											<property name="DarreichungsformFreitext" />
+										</bindings>
+										<bindings node="xs:attribute[@name='m']">
+											<property name="DosierschemaMorgens" />
+										</bindings>
+										<bindings node="xs:attribute[@name='d']">
+											<property name="DosierschemaMittags" />
+										</bindings>
+										<bindings node="xs:attribute[@name='v']">
+											<property name="DosierschemaAbends" />
+										</bindings>
+										<bindings node="xs:attribute[@name='h']">
+											<property name="DosierschemaNachts" />
+										</bindings>
+										<bindings node="xs:attribute[@name='t']">
+											<property name="DosierschemaFreitext" />
+										</bindings>
+										<bindings node="xs:attribute[@name='du']">
+											<property name="DosiereinheitCode" />
+										</bindings>
+										<bindings node="xs:attribute[@name='dud']">
+											<property name="DosiereinheitFreitext" />
+										</bindings>
+										<bindings node="xs:attribute[@name='i']">
+											<property name="Hinweise" />
+										</bindings>
+										<bindings node="xs:attribute[@name='r']">
+											<property name="Behandlungsgrund" />
+										</bindings>
+										<bindings node="xs:attribute[@name='x']">
+											<property name="Zusatzzeile" />
+										</bindings> -->
+									</bindings>
+								</bindings>
+								<bindings node="xs:element[@name='X']">
+									<bindings node="xs:complexType">
+										<class name="Freitextzeile" />
+										<!-- <bindings node="xs:attribute[@name='t']">
+											<property name="Freitext" />
+										</bindings> -->
+									</bindings>
+								</bindings>
+								<bindings node="xs:element[@name='R']">
+									<bindings node="xs:complexType">
+										<class name="Rezeptur" />
+										<!--  <bindings node="xs:attribute[@name='t']">
+											<property name="Freitext" />
+										</bindings>
+										<bindings node="xs:attribute[@name='x']">
+											<property name="Zusatzzeile" />
+										</bindings> -->
+									</bindings>
+								</bindings>
+							</bindings>
+							<bindings node="xs:attribute[@name='t']">
+								<property name="ZwischenueberschriftFreitext" />
+							</bindings>
+							<bindings node="xs:attribute[@name='c']">
+								<property name="Zwischenueberschrift" />
+							</bindings>
+						</bindings>
+					</bindings>
+				</bindings>
+				<bindings node="xs:attribute[@name='v']">
+					<property name="Versionsnummer" />
+				</bindings>
+				<!--
+				<bindings node="xs:attribute[@name='p']">
+					<property name="Patchnummer" />
+				</bindings>
+				 -->
+				<bindings node="xs:attribute[@name='U']">
+					<property name="InstanzId" />
+				</bindings>
+				<!-- 
+				<bindings node="xs:attribute[@name='a']">
+					<property name="Seitenzahl" />
+				</bindings>
+				<bindings node="xs:attribute[@name='z']">
+					<property name="Gesamtseitenzahl" />
+				</bindings>
+				 -->
+				<bindings node="xs:attribute[@name='l']">
+					<property name="SprachLaenderkennzeichen" />
+				</bindings>
+			</bindings>
+		</bindings>
+	</bindings>
+</bindings>
