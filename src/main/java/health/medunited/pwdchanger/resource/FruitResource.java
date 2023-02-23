@@ -1,7 +1,7 @@
-package health.medunited.pwdchanger;
+package health.medunited.pwdchanger.resource;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
+import health.medunited.pwdchanger.service.Fruit;
+
 import java.util.Set;
 
 import javax.ws.rs.*;

@@ -1,4 +1,4 @@
-package health.medunited.pwdchanger;
+package health.medunited.pwdchanger.service;
 
 public class Fruit {
 
