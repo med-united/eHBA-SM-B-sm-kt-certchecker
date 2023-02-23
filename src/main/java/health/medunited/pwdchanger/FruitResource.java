@@ -1,4 +1,4 @@
-package org.acme.rest.json;
+package health.medunited.pwdchanger;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

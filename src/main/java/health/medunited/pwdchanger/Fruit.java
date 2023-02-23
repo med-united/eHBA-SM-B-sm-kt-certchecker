@@ -1,4 +1,4 @@
-package org.acme.rest.json;
+package health.medunited.pwdchanger;
 
 public class Fruit {
 

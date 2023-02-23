@@ -1,4 +1,4 @@
-package org.acme.rest.json;
+package health.medunited.pwdchanger;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
