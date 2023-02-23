@@ -1,0 +1,5 @@
+org\acme\rest\json\Legume.class
+org\acme\rest\json\Fruit.class
+org\acme\rest\json\LoggingFilter.class
+org\acme\rest\json\LegumeResource.class
+org\acme\rest\json\FruitResource.class
