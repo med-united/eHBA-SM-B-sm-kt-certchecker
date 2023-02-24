@@ -1,7 +1,5 @@
 package health.medunited.pwdchanger.resource;
 
-
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -15,10 +13,5 @@ public class FruitResource {
     public String getPinInfo() {
         return "Hola!!!";
     }
-
-//    @POST
-//    public Set<Fruit> add(Fruit fruit) {
-//        return null;
-//    }
 
 }
