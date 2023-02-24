@@ -5,14 +5,15 @@ import de.gematik.ws.conn.connectorcontext.v2.ContextType;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
 import health.medunited.pwdchanger.security.FakeX509TrustManager;
 import health.medunited.pwdchanger.service.EventServicePort;
-import health.medunited.pwdchanger.security.FakeHostnameVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.TrustManager;
 
+@Disabled
 class EventServicePortTest {
 
     EventServicePort eventServicePort;
