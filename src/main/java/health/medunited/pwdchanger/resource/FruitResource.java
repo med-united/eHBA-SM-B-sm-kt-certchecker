@@ -1,5 +1,7 @@
 package health.medunited.pwdchanger.resource;
 
+import health.medunited.pwdchanger.service.Fruit;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -11,7 +13,10 @@ public class FruitResource {
     @Path("/status")
     @Produces(MediaType.TEXT_PLAIN)
     public String getPinInfo() {
-        return "Hola!!!";
+        System.out.println(" ");
+        System.out.println("Inside Fruit Resource");
+        Fruit f = new Fruit();
+        return "Hola!!!" + f.returnString;
     }
 
 }
