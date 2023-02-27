@@ -57,4 +57,17 @@ public class CardServicePort {
         return null;
     }
 
+    public ChangePinResponse changePin(String cardHandle) {
+        Holder<Status> status = new Holder<>();
+        Holder<PinResultEnum> pinResultEnum = new Holder<>();
+        Holder<BigInteger> leftTries = new Holder<>();
+        try {
+            this.cardServicePortType.changePin(context, cardHandle, "PIN.QES", status, pinResultEnum, leftTries);
+            return new ChangePinResponse(status.value, pinResultEnum.value, leftTries.value);
+        } catch (de.gematik.ws.conn.cardservice.wsdl.v8.FaultMessage e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
