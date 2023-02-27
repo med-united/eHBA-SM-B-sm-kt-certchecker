@@ -34,14 +34,14 @@ class PwdChangerServiceTest {
 
     @Test
     void changePinTest() {
-        ChangePinResponse pinStatus = cardServicePort.changePin("1137aed3-3a71-4553-87e5-5becf1178019");
+        ChangePinResponse pinStatus = cardServicePort.changePin("abc0f624-7e15-4a4d-9006-d7637883a341");
         System.out.println(pinStatus.getStatus());
         //Assertions.assertFalse(pinStatus.getStatus().getResult().isEmpty());
     }
 
     @Test
     void getPinStatusTest() {
-        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("1137aed3-3a71-4553-87e5-5becf1178019");
+        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("abc0f624-7e15-4a4d-9006-d7637883a341");
         System.out.println(pinStatus.getStatus());
         //Assertions.assertFalse(pinStatus.getStatus().getResult().isEmpty());
     }

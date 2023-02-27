@@ -7,11 +7,21 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/password")
+@Path("/")
 public class PasswordChangerResource {
 
     @Inject
     PasswordChangerService passwordChangerService;
+
+
+    @POST
+    @Path("/changePIN")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String setPin() {
+        System.out.println(" ");
+        System.out.println("Inside Resource File");
+        return passwordChangerService.changePin();
+    }
 
     @GET
     @Path("/getCard")
