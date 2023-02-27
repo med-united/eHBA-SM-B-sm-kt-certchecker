@@ -3,6 +3,7 @@ package health.medunited.pwdchanger;
 import de.gematik.ws.conn.connectorcontext.v2.ContextType;
 import health.medunited.pwdchanger.model.gematik.GetPinStatusResponse;
 import health.medunited.pwdchanger.security.FakeX509TrustManager;
+import health.medunited.pwdchanger.service.AmtsServicePort;
 import health.medunited.pwdchanger.service.CardServicePort;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import javax.net.ssl.TrustManager;
 class PwdChangerServiceTest {
 
     CardServicePort cardServicePort;
+    AmtsServicePort amtsServicePort;
 
     @BeforeEach
     void init() {
@@ -24,11 +26,13 @@ class PwdChangerServiceTest {
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
         cardServicePort = new CardServicePort("http://localhost/cardservice", contextType, trustManager, hostnameVerifier);
+        amtsServicePort = new AmtsServicePort("http://localhost/amtsservice", trustManager, hostnameVerifier);
+
     }
 
     @Test
     void getPinStatusTest() {
-        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("00303add-87db-450b-bd18-0ab48c7b4ff9");
+        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("1137aed3-3a71-4553-87e5-5becf1178019");
         System.out.println(pinStatus.getStatus());
         //Assertions.assertFalse(pinStatus.getStatus().getResult().isEmpty());
     }
