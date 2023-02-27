@@ -17,7 +17,18 @@ public class PasswordChangerResource {
     @Path("/getCard")
     @Produces(MediaType.TEXT_PLAIN)
     public String getPinInfo() {
+        System.out.println(" ");
+        System.out.println("Inside Resource File");
         return passwordChangerService.getCard();
+    }
+
+    @GET
+    @Path("/getStatus")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getPINStatus() {
+        System.out.println(" ");
+        System.out.println("Inside Resource File");
+        return passwordChangerService.getCardDetails();
     }
 
 }
