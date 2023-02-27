@@ -23,7 +23,7 @@ public class PasswordChangerService {
     }
 
     public String setSomething() {
-
+        return "hola";
     }
 
     public String getCard() {
