@@ -4,6 +4,7 @@ import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
 import de.gematik.ws.conn.connectorcontext.v2.ContextType;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
 import health.medunited.pwdchanger.security.FakeX509TrustManager;
+import health.medunited.pwdchanger.service.AmtsServicePort;
 import health.medunited.pwdchanger.service.EventServicePort;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import javax.net.ssl.TrustManager;
 class EventServicePortTest {
 
     EventServicePort eventServicePort;
+    AmtsServicePort amtsServicePort;
 
     @BeforeEach
     void init() {
@@ -27,6 +29,8 @@ class EventServicePortTest {
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
         eventServicePort = new EventServicePort("http://localhost/eventservice", contextType, trustManager, hostnameVerifier);
+        amtsServicePort = new AmtsServicePort("http://localhost/amtsservice", trustManager, hostnameVerifier);
+
     }
 
     @Test
