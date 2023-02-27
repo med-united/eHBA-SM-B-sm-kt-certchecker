@@ -1,6 +1,7 @@
 package health.medunited.pwdchanger;
 
 import de.gematik.ws.conn.connectorcontext.v2.ContextType;
+import health.medunited.pwdchanger.model.gematik.ChangePinResponse;
 import health.medunited.pwdchanger.model.gematik.GetPinStatusResponse;
 import health.medunited.pwdchanger.security.FakeX509TrustManager;
 import health.medunited.pwdchanger.service.AmtsServicePort;
@@ -32,7 +33,8 @@ class PwdChangerServiceTest {
 
     @Test
     void getPinStatusTest() {
-        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("1137aed3-3a71-4553-87e5-5becf1178019");
+        ChangePinResponse pinStatus = cardServicePort.verifyPin("1137aed3-3a71-4553-87e5-5becf1178019");
+        //GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("1137aed3-3a71-4553-87e5-5becf1178019");
         System.out.println(pinStatus.getStatus());
         //Assertions.assertFalse(pinStatus.getStatus().getResult().isEmpty());
     }
