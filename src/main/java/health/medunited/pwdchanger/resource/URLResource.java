@@ -1,5 +1,6 @@
 package health.medunited.pwdchanger.resource;
 
+import health.medunited.pwdchanger.service.CertificateVerifyService;
 import health.medunited.pwdchanger.service.PasswordChangerService;
 
 import javax.inject.Inject;
@@ -8,11 +9,13 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/")
-public class PasswordChangerResource {
+public class URLResource {
 
     @Inject
     PasswordChangerService passwordChangerService;
 
+    @Inject
+    CertificateVerifyService certificateVerifyService;
 
     @POST
     @Path("/changePIN")
@@ -47,7 +50,7 @@ public class PasswordChangerResource {
     public String checkCertificate() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return passwordChangerService.getCardDetails();
+        return certificateVerifyService.verifyCert();
     }
 
 }
