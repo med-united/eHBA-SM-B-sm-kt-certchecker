@@ -153,6 +153,7 @@
                                 <wsdlFile>conn/amtss/AMTSService.wsdl</wsdlFile>
                                 <wsdlFile>conn/EventService.wsdl</wsdlFile>
                                 <wsdlFile>conn/CardService.wsdl</wsdlFile>
+                                <wsdlFile>conn/CertificateService.wsdl</wsdlFile>
                             </wsdlFiles>
                             <vmArgs>
                                 <vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
