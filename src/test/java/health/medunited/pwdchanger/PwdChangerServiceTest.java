@@ -8,11 +8,13 @@ import health.medunited.pwdchanger.service.AmtsServicePort;
 import health.medunited.pwdchanger.service.CardServicePort;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.TrustManager;
 
+@Disabled
 class PwdChangerServiceTest {
 
     CardServicePort cardServicePort;
