@@ -41,4 +41,13 @@ public class PasswordChangerResource {
         return passwordChangerService.getCardDetails();
     }
 
+    @GET
+    @Path("/checkCert")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String checkCertificate() {
+        System.out.println(" ");
+        System.out.println("Inside Resource File");
+        return passwordChangerService.getCardDetails();
+    }
+
 }
