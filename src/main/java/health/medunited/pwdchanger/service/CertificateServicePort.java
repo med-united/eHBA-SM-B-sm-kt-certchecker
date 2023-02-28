@@ -9,10 +9,9 @@ public class CertificateServicePort {
     private final ContextType context;
 
     private final CertificateServicePortType certificateServicePortType;
-    public CertificateServicePort(ContextType context, CertificateServicePortType certificateServicePortType) {
-
+    public CertificateServicePort(ContextType context, CertificateServicePortType certificateServicePortType, CertificateServicePortType certificateServicePortType1) {
         this.context = context;
-        this.certificateServicePortType = certificateServicePortType;
+        this.certificateServicePortType = certificateServicePortType1;
     }
 
     public ReadCardCertificateResponse verifyCertificate() {
