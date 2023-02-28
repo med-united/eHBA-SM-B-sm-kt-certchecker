@@ -1,5 +1,5 @@
 package health.medunited.pwdchanger.service;
 
-public class CertificateVerifyService {
+public class CertificateServicePort {
 
 }
