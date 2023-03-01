@@ -1,5 +1,3 @@
-$\colorbox{lightblue}{text}$
-
 # Checker for Card-Certificates from the Gematik System
 
 This utility will connect to the KoPS system and verify the certificates of the inserted cards
