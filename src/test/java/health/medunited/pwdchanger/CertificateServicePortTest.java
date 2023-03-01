@@ -34,12 +34,12 @@ public class CertificateServicePortTest {
 
     @Test
     ReadCardCertificateResponse readACertificate() {
-        /*
+/*
         ReadCardCertificateResponse res = certificateServicePort
                 .readCardCertificate(certificateServicePort.getContext(),
-                        certificateServicePort.getCardHandle(),ReadCardCertificate.getCertRefList());
-
-         */
+                        certificateServicePort.getCardHandle(),
+                        ReadCardCertificate.getCertRefList());
+*/
         return null;
     }
 
