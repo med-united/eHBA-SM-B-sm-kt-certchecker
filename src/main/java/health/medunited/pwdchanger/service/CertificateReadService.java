@@ -1,5 +1,6 @@
 package health.medunited.pwdchanger.service;
 
+import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificate;
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificateResponse;
 import de.gematik.ws.conn.connectorcontext.v2.ContextType;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
@@ -37,7 +38,11 @@ public class CertificateReadService {
 
         //TODO: In order to discover the endpoints on the connector, parse the connector.sds file
         certificateServicePort = new CertificateServicePort("http://localhost/cardservice", contextType, trustManager, hostnameVerifier);
-        ReadCardCertificateResponse cardResp = certificateServicePort.verifyCertificate();
+        ReadCardCertificateResponse cardResp = certificateServicePort.readCardCertificate(
+                contextType,
+                certificateServicePort.getCardHandle(),
+                certificateServicePort.getCertRefList()
+        );
         return String.valueOf(cardResp);
 
     }

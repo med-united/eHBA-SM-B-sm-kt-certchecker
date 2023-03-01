@@ -72,4 +72,5 @@ public class CertificateServicePort {
     public  ReadCardCertificate.CertRefList getCertRefList() {
         return certRefList;
     }
+
 }
