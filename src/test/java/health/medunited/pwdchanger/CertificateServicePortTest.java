@@ -25,6 +25,12 @@ public class CertificateServicePortTest {
         contextType.setClientSystemId("ClientID1");
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
+        certificateServicePort = new CertificateServicePort(
+                "http://localhost/certificateservice",
+                contextType,
+                trustManager,
+                hostnameVerifier
+        );
     }
 
     @Test
