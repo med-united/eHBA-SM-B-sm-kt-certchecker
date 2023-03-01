@@ -5,7 +5,9 @@ depending on which parameters you pass over the POST request
 
 # Setup
 mvn install
+
 mvn package
+
 mvn quarkus:dev
 
 go to
