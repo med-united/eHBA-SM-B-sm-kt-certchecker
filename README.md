@@ -32,3 +32,13 @@ All the GET requests (Endpoints that start with "get") can be seen via the brows
 POST requests need the Postman applications and the Headers should be specified in the corresponding fields
 and NOT as URL Parameters
 
+# Tests
+````
+\src\test\java\health\medunited\pwdchanger
+````
+In the above folder there are a few .java files that have test-functions which can be run inside of IntelliJ
+To do this highlight the corresponding function, insert a breakpoint at the end and press debug.
+
+
+
+
