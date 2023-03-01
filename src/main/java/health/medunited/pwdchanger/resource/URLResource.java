@@ -1,5 +1,6 @@
 package health.medunited.pwdchanger.resource;
 import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
+import health.medunited.pwdchanger.service.CertificateReadService;
 import health.medunited.pwdchanger.service.CertificateVerifyService;
 import health.medunited.pwdchanger.service.EventServicePort;
 import health.medunited.pwdchanger.service.PasswordChangerService;
@@ -17,6 +18,9 @@ public class URLResource {
 
     @Inject
     CertificateVerifyService certificateVerifyService;
+
+    @Inject
+    CertificateReadService certificateReadService;
 
     @POST
     @Path("/changePIN")
@@ -43,6 +47,16 @@ public class URLResource {
         System.out.println(" ");
         System.out.println("Inside Resource File");
         return passwordChangerService.getCardDetails();
+    }
+
+
+    @GET
+    @Path("/readCert")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String readCertificate() {
+        System.out.println(" ");
+        System.out.println("Inside Resource File");
+        return certificateReadService.readTheCert();
     }
 
     @GET
