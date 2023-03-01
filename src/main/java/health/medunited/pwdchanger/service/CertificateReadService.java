@@ -22,7 +22,7 @@ public class CertificateReadService {
         System.out.println("Constructor of CertRead");
     }
 
-    public String readTheCert() {
+    public String readCardCertificate() {
 
         //TODO: create a provider that is able to construct the context type from http headers automatically
         ContextType contextType = new ContextType();

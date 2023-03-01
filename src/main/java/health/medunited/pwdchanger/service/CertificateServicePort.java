@@ -19,13 +19,13 @@ import javax.xml.ws.Holder;
 public class CertificateServicePort {
 
 
-    private final CertificateServicePortType certificateServicePortType;
+    CertificateServicePortType certificateServicePortType;
 
-    private final ContextType context;
+    ContextType context;
 
-    private final String cardHandle = "abc1";
+    String cardHandle = "93ee0d2e-dc49-47e8-84b6-749ca0af6af0";
 
-    private final ReadCardCertificate.CertRefList certRefList;
+    ReadCardCertificate readCardCertificate;
 
     public CertificateServicePort(String endpoint, ContextType context, TrustManager trustManager, HostnameVerifier hostnameVerifier) {
         this.context = context;
@@ -35,7 +35,8 @@ public class CertificateServicePort {
         BindingProvider bp = (BindingProvider) certificateServicePortType;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
         BindingProviderConfigurer.configure(bp, trustManager, hostnameVerifier);
-        certRefList = null;
+
+
     }
 
     public ReadCardCertificateResponse readCardCertificate(ContextType context, String cardHandle,  ReadCardCertificate.CertRefList certRefList) {
@@ -70,7 +71,7 @@ public class CertificateServicePort {
     }
 
     public  ReadCardCertificate.CertRefList getCertRefList() {
-        return certRefList;
+        return readCardCertificate.getCertRefList();
     }
 
 }

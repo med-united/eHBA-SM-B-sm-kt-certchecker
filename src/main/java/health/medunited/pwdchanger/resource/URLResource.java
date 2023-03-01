@@ -56,11 +56,11 @@ public class URLResource {
     public String readCertificate() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return certificateReadService.readTheCert();
+        return certificateReadService.readCardCertificate();
     }
 
     @GET
-    @Path("/checkCert")
+    @Path("/verifyCert")
     @Produces(MediaType.TEXT_PLAIN)
     public String checkCertificate() {
         System.out.println(" ");
