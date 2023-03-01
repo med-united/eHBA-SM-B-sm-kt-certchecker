@@ -5,10 +5,12 @@ depending on which parameters you pass over the POST request
 
 # Setup
 ```
-mvn install
 mvn package
 mvn quarkus:dev
 ```
+
+Please make sure to mvn package the application *before* opening it in IntelliJ. If not, delete the .idea
+hidden folder. Otherwise the syntax-highlighting and dependency-scan will be inaccurate.
 
 go to
 
