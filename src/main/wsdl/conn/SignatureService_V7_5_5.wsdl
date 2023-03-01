@@ -96,7 +96,11 @@
     <message name="FaultMessage">
         <part name="parameter" element="GERROR:Error"/>
     </message>
+<<<<<<< HEAD
     <portType name="SignatureServicePortType">
+=======
+    <portType name="SignatureServicePortTypeV7_5_5">
+>>>>>>> comm
         <operation name="VerifyDocument">
             <input message="SIGW:VerifyDocumentRequestMessage"/>
             <output message="SIGW:VerifyDocumentResponseMessage"/>
@@ -133,7 +137,11 @@
             <fault name="FaultMessage" message="SIGW:FaultMessage"/>
         </operation>
     </portType>
+<<<<<<< HEAD
     <binding name="SignatureServiceBinding" type="SIGW:SignatureServicePortType">
+=======
+    <binding name="SignatureServiceBinding" type="SIGW:SignatureServicePortTypeV7_5_5">
+>>>>>>> comm
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="VerifyDocument">
             <soap:operation soapAction="http://ws.gematik.de/conn/SignatureService/v7.5#VerifyDocument"/>
@@ -220,8 +228,13 @@
             </fault>
         </operation>
     </binding>
+<<<<<<< HEAD
     <service name="SignatureService">
         <port name="SignatureServicePort" binding="SIGW:SignatureServiceBinding">
+=======
+    <service name="SignatureServiceV7_5_5">
+        <port name="SignatureServicePortTypeV7_5_5" binding="SIGW:SignatureServiceBinding">
+>>>>>>> comm
             <soap:address location="http://ti-konnektor/signatureservice"/>
         </port>
     </service>

@@ -1,0 +1,14 @@
+AuthSignatureService.wsdl
+AuthSignatureService_v7_4_1.wsdl
+CardService.wsdl
+CardService_v8_1_1.wsdl
+CardService_v8_1_2.wsdl
+CardTerminalService.wsdl
+CertificateService.wsdl
+CertificateService_v6_0_1.wsdl
+EncryptionService.wsdl
+EncryptionService_v6_1_1.wsdl
+EventService.wsdl
+SignatureService.wsdl
+SignatureService_V7_4_2.wsdl
+SignatureService_V7_5_5.wsdl
