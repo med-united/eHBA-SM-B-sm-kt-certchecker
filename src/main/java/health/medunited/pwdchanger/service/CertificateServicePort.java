@@ -1,6 +1,8 @@
 package health.medunited.pwdchanger.service;
 
-import de.gematik.ws.conn.cardservice.v8.PinStatusEnum;
+
+import health.medunited.pwdchanger.security.BindingProviderConfigurer;
+
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificate;
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificateResponse;
 import de.gematik.ws.conn.certificateservice.wsdl.v6.CertificateService;
@@ -8,14 +10,11 @@ import de.gematik.ws.conn.certificateservice.wsdl.v6.CertificateServicePortType;
 import de.gematik.ws.conn.certificateservicecommon.v2.X509DataInfoListType;
 import de.gematik.ws.conn.connectorcommon.v5.Status;
 import de.gematik.ws.conn.connectorcontext.v2.ContextType;
-import health.medunited.pwdchanger.model.gematik.GetPinStatusResponse;
-import health.medunited.pwdchanger.security.BindingProviderConfigurer;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.TrustManager;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Holder;
-import java.math.BigInteger;
 
 public class CertificateServicePort {
 
@@ -41,18 +40,6 @@ public class CertificateServicePort {
 
     public ReadCardCertificateResponse readCardCertificate(ContextType context, String cardHandle,  ReadCardCertificate.CertRefList certRefList) {
 
-        /*
-        Return Parameters:
-        Status
-        CertRef
-        X509Data
-        X509IssuerName
-        509SerialNumber
-        X509SubjectName
-        X509BaseCertificateId
-        X509Certificate
-         */
-
         Holder<Status> status = new Holder<>();
         Holder<X509DataInfoListType> certList = new Holder<>();
 
@@ -76,5 +63,13 @@ public class CertificateServicePort {
 
     public ContextType getContext() {
         return context;
+    }
+
+    public String getCardHandle() {
+        return cardHandle;
+    }
+
+    public  ReadCardCertificate.CertRefList getCertRefList() {
+        return certRefList;
     }
 }
