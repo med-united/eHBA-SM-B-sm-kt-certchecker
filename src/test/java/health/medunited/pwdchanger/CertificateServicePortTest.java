@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.TrustManager;
 
-@Disabled
 public class CertificateServicePortTest {
     CertificateServicePort certificateServicePort;
 

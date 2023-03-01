@@ -11,6 +11,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.TrustManager;
 import javax.xml.ws.BindingProvider;
 
+
 public class EventServicePort {
 
     private final EventServicePortType eventServicePortType;

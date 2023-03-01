@@ -1,5 +1,7 @@
 package health.medunited.pwdchanger.resource;
+import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
 import health.medunited.pwdchanger.service.CertificateVerifyService;
+import health.medunited.pwdchanger.service.EventServicePort;
 import health.medunited.pwdchanger.service.PasswordChangerService;
 
 import javax.inject.Inject;
@@ -49,7 +51,6 @@ public class URLResource {
     public String checkCertificate() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        //return "cv";
         return certificateVerifyService.verifyCert();
     }
 
