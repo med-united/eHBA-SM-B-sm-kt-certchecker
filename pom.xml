@@ -154,7 +154,6 @@
                                 <wsdlFile>conn/EventService.wsdl</wsdlFile>
                                 <wsdlFile>conn/CardService.wsdl</wsdlFile>
                                 <wsdlFile>conn/CertificateService.wsdl</wsdlFile>
-                                <wsdlFile>conn/SignatureService.wsdl</wsdlFile>
                             </wsdlFiles>
                             <vmArgs>
                                 <vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
