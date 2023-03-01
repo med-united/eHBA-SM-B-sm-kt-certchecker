@@ -1,15 +1,10 @@
 package health.medunited.pwdchanger;
 
-import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
-import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificate;
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificateResponse;
 import de.gematik.ws.conn.connectorcontext.v2.ContextType;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
 import health.medunited.pwdchanger.security.FakeX509TrustManager;
-import health.medunited.pwdchanger.service.AmtsServicePort;
-import health.medunited.pwdchanger.service.CardServicePort;
 import health.medunited.pwdchanger.service.CertificateServicePort;
-import health.medunited.pwdchanger.service.EventServicePort;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -34,13 +29,16 @@ public class CertificateServicePortTest {
 
     @Test
     ReadCardCertificateResponse readACertificate() {
-/*
+
         ReadCardCertificateResponse res = certificateServicePort
-                .readCardCertificate(certificateServicePort.getContext(),
+                .readCardCertificate(
+                        certificateServicePort.getContext(),
                         certificateServicePort.getCardHandle(),
-                        ReadCardCertificate.getCertRefList());
-*/
-        return null;
+                        certificateServicePort.getCertRefList()
+                );
+        System.out.println(res);
+        Assertions.assertFalse(1==2);
+        return res;
     }
 
 }
