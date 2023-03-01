@@ -32,3 +32,4 @@ All the GET requests (Endpoints that start with "get") can be seen via the brows
 POST requests need the Postman applications and the Headers should be specified in the corresponding fields
 and NOT as URL Parameters
 
+![img.png](img.png)
