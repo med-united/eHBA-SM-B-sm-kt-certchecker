@@ -24,8 +24,9 @@
 //import de.gematik.ws.conn.signatureservice.wsdl.v7.SignatureServiceV755;
 //import de.gematik.ws.conn.vsds.vsdservice.v5.VSDService;
 //import de.gematik.ws.conn.vsds.vsdservice.v5.VSDServicePortType;
-//import health.ere.ps.config.UserConfig;
-//import health.ere.ps.config.interceptor.ProvidedConfig;
+//import health.medunited.pwdchanger.config.ProvidedConfig;
+//import health.medunited.pwdchanger.config.UserConfig;
+//import health.medunited.pwdchanger.config.ProvidedConfig;
 //import health.ere.ps.service.common.security.SecretsManagerService;
 //import health.ere.ps.service.connector.endpoint.EndpointDiscoveryService;
 //import health.ere.ps.service.connector.endpoint.SSLUtilities;
