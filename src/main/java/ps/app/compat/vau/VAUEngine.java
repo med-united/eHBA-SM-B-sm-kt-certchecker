@@ -1,4 +1,4 @@
-package health.medunited.pwdchanger.vau;
+package ps.app.compat.vau;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

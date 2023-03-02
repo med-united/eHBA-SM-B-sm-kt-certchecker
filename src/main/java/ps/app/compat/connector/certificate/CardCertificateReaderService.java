@@ -1,4 +1,4 @@
-package health.medunited.pwdchanger.certificate;
+package ps.app.compat.connector.certificate;
 
 import java.math.BigInteger;
 import java.security.cert.X509Certificate;
