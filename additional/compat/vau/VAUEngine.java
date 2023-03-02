@@ -286,7 +286,7 @@ public class VAUEngine extends ApacheHttpClient43Engine {
         response.setProperties(request.getMutableProperties());
         response.setStatus(res.getStatusLine().getStatusCode());
         response.setReasonPhrase(res.getStatusLine().getReasonPhrase());
-        response.setHeaders(extractHeaders(res));
+        response.setHeaders(ManualClosingApacheHttpClient43Engine.extractHeaders(res));
         response.setClientConfiguration(request.getClientConfiguration());
         return response;
     }
