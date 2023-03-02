@@ -1,24 +1,19 @@
 package health.medunited.pwdchanger.config;
 
 
+import javax.json.JsonObject;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.servlet.http.HttpServletRequest;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.json.JsonObject;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.servlet.http.HttpServletRequest;
 
 public class UserConfigurations {
 
