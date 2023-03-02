@@ -45,24 +45,17 @@
 			===========
 			*** ServicePolicy durch GenerateUnderSignature ersetzt
 	 End of Version History-->
-<<<<<<< HEAD
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vr="urn:oasis:names:tc:dss-x:1.0:profiles:verificationreport:schema#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema" xmlns:SIG="http://ws.gematik.de/conn/SignatureService/v7.5" xmlns:CONN="http://ws.gematik.de/conn/ConnectorCommon/v5.0" xmlns:CCTX="http://ws.gematik.de/conn/ConnectorContext/v2.0" xmlns:sp="urn:oasis:names:tc:dss-x:1.0:profiles:SignaturePolicy:schema#" xmlns:CERTCMN="http://ws.gematik.de/conn/CertificateServiceCommon/v2.0" xmlns:GERROR="http://ws.gematik.de/tel/error/v2.0" targetNamespace="http://ws.gematik.de/conn/SignatureService/v7.5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="7.5.5">
-=======
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vr="urn:oasis:names:tc:dss-x:1.0:profiles:verificationreport:schema#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema" xmlns:SIG="http://ws.gematik.de/conn/SignatureService/v7.5" xmlns:CONN="http://ws.gematik.de/conn/ConnectorCommon/v5.0" xmlns:CCTX="http://ws.gematik.de/conn/ConnectorContext/v2.0" xmlns:sp="urn:oasis:names:tc:dss-x:1.0:profiles:SignaturePolicy:schema#" xmlns:CERTCMN="http://ws.gematik.de/conn/CertificateServiceCommon/v2.0" xmlns:GERROR="http://ws.gematik.de/tel/error/v2.0" targetNamespace="http://ws.gematik.de/conn/SignatureService/v7.5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="7.5.5" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="1.0">
->>>>>>> comm
     <annotation>
         <documentation xml:lang="de">
 			Copyright (c) 2021, gematik GmbH. Alle Rechte vorbehalten. 
 			Beschreibung: Schema für den Signaturdienst des Konnektors
 		</documentation>
-<<<<<<< HEAD
-=======
 		<appinfo>
 			<jxb:schemaBindings>
 				<jxb:package xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" name="de.gematik.ws.conn.signatureservice.v7_5_5" />
 			</jxb:schemaBindings>
 		</appinfo>
->>>>>>> comm
     </annotation>
     <import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../ext/xmldsig-core-schema.xsd"/>
     <import namespace="urn:oasis:names:tc:dss-x:1.0:profiles:SignaturePolicy:schema#" schemaLocation="../ext/oasis-dssx-1.0-profiles-sigpolicy-schema-cd01.xsd"/>
