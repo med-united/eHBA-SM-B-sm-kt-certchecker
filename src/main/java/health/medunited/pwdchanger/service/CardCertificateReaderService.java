@@ -10,6 +10,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.xml.ws.Holder;
 
+import health.medunited.pwdchanger.config.RuntimeConfig;
+import health.medunited.pwdchanger.connector.ConnectorCardCertificateReadException;
+import health.medunited.pwdchanger.crypto.CryptoLoader;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -21,10 +24,10 @@ import de.gematik.ws.conn.certificateservicecommon.v2.CertRefEnum;
 import de.gematik.ws.conn.certificateservicecommon.v2.X509DataInfoListType;
 import de.gematik.ws.conn.connectorcommon.v5.Status;
 import org.apache.commons.lang3.ArrayUtils;
-import health.ere.ps.config.RuntimeConfig;
-import health.ere.ps.exception.connector.ConnectorCardCertificateReadException;
-import health.ere.ps.service.connector.provider.MultiConnectorServicesProvider;
-import health.ere.ps.service.idp.crypto.CryptoLoader;
+import health.medunited.pwdchanger.config.RuntimeConfig;
+import health.medunited.pwdchanger.connector.ConnectorCardCertificateReadException;
+import health.medunited.pwdchanger.service.MultiConnectorServicesProvider;
+import health.medunited.pwdchanger.crypto.CryptoLoader;
 
 @ApplicationScoped
 public class CardCertificateReaderService {
