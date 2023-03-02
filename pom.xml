@@ -173,6 +173,10 @@
                                 <wsdlFile>conn/CertificateService.wsdl</wsdlFile>
                                 <wsdlFile>conn/SignatureService.wsdl</wsdlFile>
                                 <wsdlFile>conn/AuthSignatureService.wsdl</wsdlFile>
+                                <wsdlFile>vsds/VSDService.wsdl</wsdlFile>
+                                <wsdlFile>conn/AuthSignatureService_v7_4_1.wsdl</wsdlFile>
+                                <wsdlFile>conn/SignatureService_V7_4_2.wsdl</wsdlFile>
+                                <wsdlFile>conn/SignatureService_V7_5_5.wsdl</wsdlFile>
                             </wsdlFiles>
                             <vmArgs>
                                 <vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
