@@ -2,6 +2,7 @@ package health.medunited.pwdchanger.crypto;
 
 import health.medunited.pwdchanger.crypto.IdpCryptoException;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.crypto.CryptoException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
