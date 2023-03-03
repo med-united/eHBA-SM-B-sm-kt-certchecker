@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import javax.websocket.Session;
 
-import health.ere.ps.model.gematik.VerifyPinResponse;
+import health.medunited.pwdchanger.model.gematik.VerifyPinResponse;
 
 public class VerifyPinResponseEvent extends AbstractEvent implements ReplyableEvent {
     

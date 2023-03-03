@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import javax.websocket.Session;
 
-import health.ere.ps.model.gematik.UnblockPinResponse;
+import health.medunited.pwdchanger.model.gematik.UnblockPinResponse;
 
 public class UnblockPinResponseEvent extends AbstractEvent implements ReplyableEvent {
     

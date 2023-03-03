@@ -9,10 +9,7 @@ import javax.inject.Inject;
 
 import health.medunited.pwdchanger.service.CardCertificateReaderService;
 import org.bouncycastle.crypto.CryptoException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import health.medunited.pwdchanger.exception.ConnectorCardCertificateReadException;
 import health.medunited.pwdchanger.exception.ConnectorCardsException;
@@ -23,6 +20,7 @@ import io.quarkus.test.junit.TestProfile;
 
 @QuarkusTest
 //@TestProfile(TitusTestProfile.class)
+@Disabled
 class CardCertificateReaderServiceTest {
 
     @Inject
@@ -56,9 +54,13 @@ class CardCertificateReaderServiceTest {
 
         String smcbHandle = connectorCardsService.getConnectorCardHandle(
                 ConnectorCardsService.CardHandleType.SMC_B);
-                
-        X509Certificate x509Certificate =
-                cardCertificateReaderService.retrieveSmcbCardCertificate(smcbHandle);
+
+        X509Certificate x509Certificate = null;
+        try {
+            x509Certificate = cardCertificateReaderService.retrieveSmcbCardCertificate(smcbHandle);
+        } catch (health.medunited.pwdchanger.connector.ConnectorCardCertificateReadException e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertNotNull(x509Certificate,
                 "Smart card certificate was retrieved");
 

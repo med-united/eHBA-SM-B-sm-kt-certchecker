@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.websocket.Session;
 
-import health.ere.ps.model.gematik.GetPinStatusResponse;
+import health.medunited.pwdchanger.model.gematik.GetPinStatusResponse;
 
 public class GetPinStatusResponseEvent extends AbstractEvent implements ReplyableEvent {
     private GetPinStatusResponse getPinStatus;
