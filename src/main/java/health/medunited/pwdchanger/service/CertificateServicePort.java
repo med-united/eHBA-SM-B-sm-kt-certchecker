@@ -1,6 +1,7 @@
 package health.medunited.pwdchanger.service;
 
 
+import de.gematik.ws.conn.certificateservicecommon.v2.CertRefEnum;
 import health.medunited.pwdchanger.security.BindingProviderConfigurer;
 
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificate;
@@ -27,6 +28,8 @@ public class CertificateServicePort {
 
     ReadCardCertificate readCardCertificate;
 
+    ReadCardCertificate.CertRefList certRefList;
+
     public CertificateServicePort(String endpoint, ContextType context, TrustManager trustManager, HostnameVerifier hostnameVerifier) {
         this.context = context;
         this.certificateServicePortType = new CertificateService(getClass()
@@ -35,7 +38,8 @@ public class CertificateServicePort {
         BindingProvider bp = (BindingProvider) certificateServicePortType;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
         BindingProviderConfigurer.configure(bp, trustManager, hostnameVerifier);
-
+        certRefList = new ReadCardCertificate.CertRefList();
+        certRefList.getCertRef().add(CertRefEnum.C_AUT);
 
     }
 
@@ -71,7 +75,7 @@ public class CertificateServicePort {
     }
 
     public  ReadCardCertificate.CertRefList getCertRefList() {
-        return readCardCertificate.getCertRefList();
+        return certRefList;
     }
 
 }
