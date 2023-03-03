@@ -141,6 +141,10 @@
             <version>1.67</version>
         </dependency>
         <dependency>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <groupId>org.bouncycastle</groupId>
+        </dependency>
+        <dependency>
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-api</artifactId>
             <version>1.0</version>
