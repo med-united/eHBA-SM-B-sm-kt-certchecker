@@ -17,6 +17,7 @@ public class PasswordChangerService {
 
     EventServicePort eventServicePort;
     CardServicePort cardServicePort;
+    CertificateServicePort certificateServicePort;
 
     @Inject
     public void PasswordChangerService() {
@@ -25,6 +26,10 @@ public class PasswordChangerService {
 
     public String setSomething() {
         return "hola";
+    }
+
+    public String getCert() {
+        return "cert";
     }
 
     public String getCard() {
