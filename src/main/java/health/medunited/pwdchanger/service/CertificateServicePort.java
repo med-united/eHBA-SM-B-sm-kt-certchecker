@@ -24,7 +24,7 @@ public class CertificateServicePort {
 
     ContextType context;
 
-    String cardHandle = "93ee0d2e-dc49-47e8-84b6-749ca0af6af0";
+    String cardHandle = "f76283c2-ef56-4273-8e23-1c187a7b95b6";//new
 
     ReadCardCertificate readCardCertificate;
 
