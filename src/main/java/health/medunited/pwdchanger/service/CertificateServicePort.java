@@ -1,6 +1,7 @@
 package health.medunited.pwdchanger.service;
 
 
+import de.gematik.ws.conn.certificateservice.wsdl.v6.FaultMessage;
 import de.gematik.ws.conn.certificateservicecommon.v2.CertRefEnum;
 import health.medunited.pwdchanger.security.BindingProviderConfigurer;
 
@@ -24,7 +25,7 @@ public class CertificateServicePort {
 
     ContextType context;
 
-    String cardHandle = "f76283c2-ef56-4273-8e23-1c187a7b95b6";//new
+    String cardHandle = "8cf86894-cc99-4c3c-b862-eeb9eb843253";//new
 
     ReadCardCertificate readCardCertificate;
 
@@ -47,13 +48,11 @@ public class CertificateServicePort {
             System.out.println(e);
         }
 
-        /*
         BindingProvider bp = (BindingProvider) certificateServicePortType;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
         BindingProviderConfigurer.configure(bp, trustManager, hostnameVerifier);
         certRefList = new ReadCardCertificate.CertRefList();
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
-         */
 
     }
 
@@ -62,17 +61,19 @@ public class CertificateServicePort {
     }
 
     public ReadCardCertificateResponse readCardCertificate(ContextType context, String cardHandle,  ReadCardCertificate.CertRefList certRefList) {
-
+        System.out.println("Inside readCartCert");
         Holder<Status> status = new Holder<>();
         Holder<X509DataInfoListType> certList = new Holder<>();
 
         try {
             this.certificateServicePortType.readCardCertificate(cardHandle, context, certRefList, status, certList);
-            return new ReadCardCertificateResponse();
-        } catch (de.gematik.ws.conn.certificateservice.wsdl.v6.FaultMessage e) {
-            e.printStackTrace();
+            System.out.println("read correctly");
+            return null;
+        } catch (Error | FaultMessage e) {
+            System.out.println("Error attempting to read certificate:");
+            System.out.println(e);
+            return null;
         }
-        return null;
 
     }
 
