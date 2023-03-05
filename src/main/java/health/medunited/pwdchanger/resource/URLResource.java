@@ -8,6 +8,7 @@ import health.medunited.pwdchanger.service.PasswordChangerService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 
 @Path("/")
@@ -54,8 +55,12 @@ public class URLResource {
     @Path("/readCert")
     @Produces(MediaType.TEXT_PLAIN)
     public String readCertificate() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         System.out.println(" ");
         System.out.println("Inside Resource File");
+
         return passwordChangerService.getCert();
         //return certificateReadService.readCardCertificate();
     }
