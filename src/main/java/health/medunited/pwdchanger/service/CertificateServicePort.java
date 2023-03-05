@@ -30,6 +30,10 @@ public class CertificateServicePort {
 
     ReadCardCertificate.CertRefList certRefList;
 
+    public CertificateServicePort() {
+
+    }
+
     public CertificateServicePort(String endpoint, ContextType context, TrustManager trustManager, HostnameVerifier hostnameVerifier) {
         this.context = context;
         this.certificateServicePortType = new CertificateService(getClass()
@@ -41,6 +45,10 @@ public class CertificateServicePort {
         certRefList = new ReadCardCertificate.CertRefList();
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
 
+    }
+
+    public String getSomething() {
+        return "intel inside";
     }
 
     public ReadCardCertificateResponse readCardCertificate(ContextType context, String cardHandle,  ReadCardCertificate.CertRefList certRefList) {

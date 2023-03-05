@@ -29,7 +29,22 @@ public class PasswordChangerService {
     }
 
     public String getCert() {
-        return "cert";
+        //called from URLResource
+
+        /* intialization */
+        ContextType contextType = new ContextType();
+        contextType.setMandantId("Mandant1");
+        contextType.setWorkplaceId("Workplace1");
+        contextType.setClientSystemId("ClientID1");
+        TrustManager trustManager = new FakeX509TrustManager();
+        HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
+
+        certificateServicePort = new CertificateServicePort();
+
+        /* end of intialization */
+
+        String sth = certificateServicePort.getSomething().toString();
+        return sth;
     }
 
     public String getCard() {
