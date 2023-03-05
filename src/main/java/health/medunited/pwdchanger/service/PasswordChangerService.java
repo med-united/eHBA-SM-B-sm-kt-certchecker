@@ -32,15 +32,13 @@ public class PasswordChangerService {
         //called from URLResource
 
         /* intialization */
+        String endpoint = "http://localhost/cardservice";
         ContextType contextType = new ContextType();
         contextType.setMandantId("Mandant1");
         contextType.setWorkplaceId("Workplace1");
         contextType.setClientSystemId("ClientID1");
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
-        String endpoint = "http://localhost/cardservice";
-
-        //certificateServicePort = new CertificateServicePort();
 
         certificateServicePort = new CertificateServicePort(
                 endpoint,
@@ -48,7 +46,6 @@ public class PasswordChangerService {
                 trustManager,
                 hostnameVerifier
         );
-
         /* end of intialization */
 
         String sth = certificateServicePort.getSomething().toString();
