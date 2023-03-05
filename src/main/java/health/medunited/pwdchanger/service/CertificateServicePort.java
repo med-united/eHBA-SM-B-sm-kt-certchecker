@@ -37,14 +37,16 @@ public class CertificateServicePort {
     public CertificateServicePort(String endpoint, ContextType context, TrustManager trustManager, HostnameVerifier hostnameVerifier) {
         this.context = context;
         try {
-            this.certificateServicePortType = new CertificateService(getClass()
-                    .getResource("/CertificateService.wsdl"))
+            certificateServicePortType = new CertificateService(
+                    getClass()
+                    .getResource("/CertificateService_v6_0_1.wsdl"))
                     .getCertificateServicePort();
             System.out.println("cspt initialized correctly");
         } catch(Exception e) {
             System.out.println("Catching cspt initialization: ");
             System.out.println(e);
         }
+
         /*
         BindingProvider bp = (BindingProvider) certificateServicePortType;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
