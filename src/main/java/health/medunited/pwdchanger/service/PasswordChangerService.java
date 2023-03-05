@@ -38,8 +38,16 @@ public class PasswordChangerService {
         contextType.setClientSystemId("ClientID1");
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
+        String endpoint = "http://localhost/cardservice";
 
-        certificateServicePort = new CertificateServicePort();
+        //certificateServicePort = new CertificateServicePort();
+
+        certificateServicePort = new CertificateServicePort(
+                endpoint,
+                contextType,
+                trustManager,
+                hostnameVerifier
+        );
 
         /* end of intialization */
 

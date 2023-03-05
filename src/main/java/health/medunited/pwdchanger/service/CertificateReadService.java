@@ -43,7 +43,8 @@ public class CertificateReadService {
                 certificateServicePort.getCardHandle(),
                 certificateServicePort.getCertRefList()
         );
-        return String.valueOf(cardResp);
+        return "end";
+        //return String.valueOf(cardResp);
 
     }
 }

@@ -36,6 +36,7 @@ public class CertificateServicePort {
 
     public CertificateServicePort(String endpoint, ContextType context, TrustManager trustManager, HostnameVerifier hostnameVerifier) {
         this.context = context;
+        /*
         this.certificateServicePortType = new CertificateService(getClass()
                 .getResource("/CertificateService.wsdl"))
                 .getCertificateServicePort();
@@ -44,6 +45,7 @@ public class CertificateServicePort {
         BindingProviderConfigurer.configure(bp, trustManager, hostnameVerifier);
         certRefList = new ReadCardCertificate.CertRefList();
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
+         */
 
     }
 
