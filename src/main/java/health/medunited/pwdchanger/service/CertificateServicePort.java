@@ -60,7 +60,7 @@ public class CertificateServicePort {
 
     }
 
-    public String readCard() {
+    public ReadCardCertificateResponse doReadCardCertificate() {
         System.out.println("Inside readCard");
         Holder<Status> status = new Holder<>();
         Holder<X509DataInfoListType> certList = new Holder<>();
@@ -70,28 +70,22 @@ public class CertificateServicePort {
             // The following line is failing:
             this.certificateServicePortType
                     .readCardCertificate(cardHandle, context, certRefList, status, certList);
-            return "The system was able to read the certificate";
+
+            ReadCardCertificateResponse readCardCertificateResponse = new ReadCardCertificateResponse();
+
+            readCardCertificateResponse.setStatus(status.value);
+            readCardCertificateResponse.setX509DataInfoList(certList.value);
+
+            System.out.println("Certificate read correctly:"+
+                    readCardCertificateResponse.getX509DataInfoList());
+
+            return readCardCertificateResponse;
+            //return "The system was able to read the certificate";
         } catch (Error | Exception e) {
-            return "The system threw an error while trying to read the certificate: \n\n"+e;
+            System.out.println("The system threw an error while trying to read the certificate: \n\n"+e);
+            return null;
         }
         //return "intel inside";
-    }
-
-    public ReadCardCertificateResponse readCardCertificate(ContextType context, String cardHandle,  ReadCardCertificate.CertRefList certRefList) {
-        System.out.println("Inside readCartCert");
-        Holder<Status> status = new Holder<>();
-        Holder<X509DataInfoListType> certList = new Holder<>();
-
-        try {
-            this.certificateServicePortType.readCardCertificate(cardHandle, context, certRefList, status, certList);
-            System.out.println("read correctly");
-            return null;
-        } catch (Error | FaultMessage e) {
-            System.out.println("Error attempting to read certificate:");
-            System.out.println(e);
-            return null;
-        }
-
     }
 
     public ReadCardCertificateResponse verifyCertificate() {

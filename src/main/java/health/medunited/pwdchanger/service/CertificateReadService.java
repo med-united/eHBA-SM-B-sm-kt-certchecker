@@ -16,13 +16,14 @@ public class CertificateReadService {
 
 
     CertificateServicePort certificateServicePort;
+    ReadCardCertificateResponse readCardCertificateResponse;
 
     @Inject
     public void CertificateReadService() {
         System.out.println("Constructor of CertRead");
     }
 
-    public String getCert() {
+    public String getCardCertificateFromPort() {
         //called from URLResource
 
         /* intialization */
@@ -42,7 +43,9 @@ public class CertificateReadService {
         );
         /* end of intialization */
 
-        String returnMessage = certificateServicePort.readCard();
+        readCardCertificateResponse = certificateServicePort.doReadCardCertificate();
+
+        String returnMessage = readCardCertificateResponse.getX509DataInfoList().toString();
         return returnMessage;
     }
 }
