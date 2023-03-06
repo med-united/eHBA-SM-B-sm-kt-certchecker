@@ -50,12 +50,8 @@ public class PasswordChangerService {
         );
         /* end of intialization */
 
-        ReadCardCertificateResponse sth = certificateServicePort.readCardCertificate(
-                contextType,
-                certificateServicePort.getCardHandle(),
-                certificateServicePort.getCertRefList()
-        );
-        return "something";
+        String sth = certificateServicePort.readCard();
+        return sth;
     }
 
     public String getCard() {

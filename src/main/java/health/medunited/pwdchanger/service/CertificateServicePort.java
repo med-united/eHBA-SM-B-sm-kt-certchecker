@@ -25,7 +25,7 @@ public class CertificateServicePort {
 
     ContextType context;
 
-    String cardHandle = "8cf86894-cc99-4c3c-b862-eeb9eb843253";//new
+    String cardHandle = "f43be851-42c4-4aad-b603-9c2f9e2f94e3";//new
 
     ReadCardCertificate readCardCertificate;
 
@@ -56,8 +56,23 @@ public class CertificateServicePort {
 
     }
 
-    public String getSomething() {
-        return "intel inside";
+    public String readCard() {
+        System.out.println("Inside readCard");
+        Holder<Status> status = new Holder<>();
+        Holder<X509DataInfoListType> certList = new Holder<>();
+
+        try {
+            System.out.println("trying...");
+            this.certificateServicePortType
+                    .readCardCertificate(cardHandle, context, certRefList, status, certList);
+            System.out.println("read correctly");
+            return "part1";
+        } catch (Error | Exception e) {
+            System.out.println("Error attempting to read certificate:");
+            System.out.println(e);
+            return "part2";
+        }
+        //return "intel inside";
     }
 
     public ReadCardCertificateResponse readCardCertificate(ContextType context, String cardHandle,  ReadCardCertificate.CertRefList certRefList) {
