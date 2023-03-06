@@ -1,12 +1,15 @@
 package health.medunited.pwdchanger.service;
 
 
+import de.gematik.ws.conn.certificateservice.v6.VerificationResultType;
 import de.gematik.ws.conn.certificateservice.wsdl.v6.FaultMessage;
 import de.gematik.ws.conn.certificateservicecommon.v2.CertRefEnum;
+
 import health.medunited.pwdchanger.security.BindingProviderConfigurer;
 
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificate;
 import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificateResponse;
+import de.gematik.ws.conn.certificateservice.v6.VerifyCertificateResponse;
 import de.gematik.ws.conn.certificateservice.wsdl.v6.CertificateService;
 import de.gematik.ws.conn.certificateservice.wsdl.v6.CertificateServicePortType;
 import de.gematik.ws.conn.certificateservicecommon.v2.X509DataInfoListType;
@@ -15,17 +18,44 @@ import de.gematik.ws.conn.connectorcontext.v2.ContextType;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.TrustManager;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Holder;
 
+import java.security.NoSuchProviderException;
+import java.security.Security;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
+import org.bouncycastle.cert.ocsp.*;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.math.BigInteger;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 public class CertificateServicePort {
 
     private static final Logger log = Logger.getLogger(CertificateServicePort.class.getName());
 
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
+
 
     CertificateServicePortType certificateServicePortType;
+
+    /* doVerifyCertificate */
+    CertificateServicePortType certificateService;
+    ContextType contextType;
+    /* doVerifyCertificate */
 
     ContextType context;
 
@@ -58,6 +88,10 @@ public class CertificateServicePort {
         certRefList = new ReadCardCertificate.CertRefList();
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
 
+        // Disabled lines because of unhandled exceptions
+        //CertificateFactory certFactory = CertificateFactory.getInstance("X.509", BouncyCastleProvider.PROVIDER_NAME);
+        //X509Certificate z = (X509Certificate) certFactory;
+
     }
 
     public ReadCardCertificateResponse doReadCardCertificate() {
@@ -87,6 +121,58 @@ public class CertificateServicePort {
         }
         //return "intel inside";
     }
+
+    void doVerifyCertificate(X509Certificate z) {
+
+        String fachdienstUrl = "http://localhost";
+
+        Holder<Status> status = new Holder<>();
+        Holder<VerifyCertificateResponse.VerificationStatus> verificationStatus = new Holder<>();
+        Holder<VerifyCertificateResponse.RoleList> arg5 = new Holder<>();
+        XMLGregorianCalendar now = null;;
+        try {
+            now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar(TimeZone.getTimeZone("UTC")));
+        } catch (DatatypeConfigurationException e) {
+            throw new IllegalStateException("Can not verify certificate from VAU", e);
+        }
+        try {
+            certificateService.verifyCertificate(contextType, z.getEncoded(), now, status, verificationStatus, arg5);
+        } catch (Exception e) {
+            throw new IllegalStateException("Can not verify certificate from VAU", e);
+        }
+        if(verificationStatus.value.getVerificationResult() != VerificationResultType.VALID) {
+            throw new IllegalStateException("VAU certificate is not valid");
+        }
+
+        // Code based on: https://github.com/apache/nifi/blob/master/nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-web/nifi-web-security/src/main/java/org/apache/nifi/web/security/x509/ocsp/OcspCertificateValidator.java#L278
+        InputStream ocspResponseStream;
+        BasicOCSPResp basicOcspResponse;
+        try {
+            ocspResponseStream = new URL(fachdienstUrl + "/VAUCertificateOCSPResponse").openStream();
+            OCSPResp oCSPResp = new OCSPResp(ocspResponseStream);
+            basicOcspResponse = (BasicOCSPResp) oCSPResp.getResponseObject();
+        } catch (IOException | OCSPException e2) {
+            throw new IllegalArgumentException("Could not parse OCSP response", e2);
+        }
+
+        BigInteger subjectSerialNumber = z.getSerialNumber();
+        // validate the response
+        final SingleResp[] responses = basicOcspResponse.getResponses();
+        for (SingleResp singleResponse : responses) {
+            final CertificateID responseCertificateId = singleResponse.getCertID();
+            final BigInteger responseSerialNumber = responseCertificateId.getSerialNumber();
+
+            if (responseSerialNumber.equals(subjectSerialNumber)) {
+                Object certStatus = singleResponse.getCertStatus();
+
+                // interpret the certificate status
+                if (certStatus instanceof RevokedStatus) {
+                    throw new IllegalStateException("VAU certificate status is revoked");
+                }
+            }
+        }
+    }
+
 
     public ReadCardCertificateResponse verifyCertificate() {
         return null;

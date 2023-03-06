@@ -32,19 +32,4 @@ public class CertificateServicePortTest {
                 hostnameVerifier
         );
     }
-
-    @Test
-    ReadCardCertificateResponse readACertificate() {
-
-        ReadCardCertificateResponse res = certificateServicePort
-                .readCardCertificate(
-                        certificateServicePort.getContext(),
-                        certificateServicePort.getCardHandle(),
-                        certificateServicePort.getCertRefList()
-                );
-        System.out.println(res);
-        Assertions.assertFalse(1==2);
-        return res;
-    }
-
 }
