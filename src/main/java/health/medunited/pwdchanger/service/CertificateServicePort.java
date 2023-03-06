@@ -88,10 +88,12 @@ public class CertificateServicePort {
         certRefList = new ReadCardCertificate.CertRefList();
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
 
-        // Disabled lines because of unhandled exceptions
-        //CertificateFactory certFactory = CertificateFactory.getInstance("X.509", BouncyCastleProvider.PROVIDER_NAME);
-        //X509Certificate z = (X509Certificate) certFactory;
-
+        try {
+            CertificateFactory certFactory = CertificateFactory.getInstance("X.509", BouncyCastleProvider.PROVIDER_NAME);
+            //X509Certificate z = (X509Certificate) certFactory;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public ReadCardCertificateResponse doReadCardCertificate() {
