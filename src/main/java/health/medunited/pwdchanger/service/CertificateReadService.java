@@ -26,7 +26,7 @@ public class CertificateReadService {
         //called from URLResource
 
         /* intialization */
-        String endpoint = "http://localhost/cardservice";
+        String endpoint = "http://localhost/certificateservice";
         ContextType contextType = new ContextType();
         contextType.setMandantId("Mandant1");
         contextType.setWorkplaceId("Workplace1");

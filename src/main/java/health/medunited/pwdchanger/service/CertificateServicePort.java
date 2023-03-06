@@ -18,7 +18,11 @@ import javax.net.ssl.TrustManager;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Holder;
 
+import java.util.logging.Logger;
+
 public class CertificateServicePort {
+
+    private static final Logger log = Logger.getLogger(CertificateServicePort.class.getName());
 
 
     CertificateServicePortType certificateServicePortType;
@@ -62,6 +66,7 @@ public class CertificateServicePort {
         Holder<X509DataInfoListType> certList = new Holder<>();
 
         try {
+            log.fine(certificateServicePortType.toString());
             // The following line is failing:
             this.certificateServicePortType
                     .readCardCertificate(cardHandle, context, certRefList, status, certList);
