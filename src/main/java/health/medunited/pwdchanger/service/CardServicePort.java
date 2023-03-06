@@ -58,6 +58,7 @@ public class CardServicePort {
     }
 
     public ChangePinResponse changePin(String cardHandle) {
+        System.out.println("CHANGING PIN");
         Holder<Status> status = new Holder<>();
         Holder<PinResultEnum> pinResultEnum = new Holder<>();
         Holder<BigInteger> leftTries = new Holder<>();

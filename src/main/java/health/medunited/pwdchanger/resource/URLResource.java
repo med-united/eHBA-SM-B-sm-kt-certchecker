@@ -18,13 +18,15 @@ public class URLResource {
 
     String mainCardHandle;
 
-    @POST
+    @GET
     @Path("/changePIN")
     @Produces(MediaType.TEXT_PLAIN)
     public String setPin() {
         System.out.println(" ");
-        System.out.println("Inside Resource File");
-        return passwordChangerService.changePin();
+        System.out.println("Inside Change Pin");
+        this.mainCardHandle = passwordChangerService.getCard();
+        return "PIN Change triggered: "+passwordChangerService.changePin(mainCardHandle)
+        +"\nPlease also see the KoPS window for status messages";
     }
 
     @GET
