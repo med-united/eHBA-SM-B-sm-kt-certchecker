@@ -52,23 +52,17 @@ public class PasswordChangerService {
         return eventServicePort.getFirstCardHandleOfType(CardTypeType.HBA);
     }
 
-    public String getCardDetails() {
+    public String getCardDetails(String mnCardHandle) {
 
-        //TODO: create a provider that is able to construct the context type from http headers automatically
         ContextType contextType = new ContextType();
         contextType.setMandantId("Mandant1");
         contextType.setWorkplaceId("Workplace1");
         contextType.setClientSystemId("ClientID1");
 
-        //TODO: at the end we must not use a fake verifier
         TrustManager trustManager = new FakeX509TrustManager();
-        HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
-
-        //TODO: the correct EventServicePort should be automatically injected7
-
-        //TODO: In order to discover the endpoints on the connector, parse the connector.sds file
+        HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();//TODO: In order to discover the endpoints on the connector, parse the connector.sds file
         cardServicePort = new CardServicePort("http://localhost/cardservice", contextType, trustManager, hostnameVerifier);
-        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus("00303add-87db-450b-bd18-0ab48c7b4ff9");
+        GetPinStatusResponse pinStatus = cardServicePort.getPinStatus(mnCardHandle);
         return String.valueOf(pinStatus.getPinStatusEnum());
 
     }

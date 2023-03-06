@@ -45,7 +45,8 @@ public class URLResource {
     public String getPINStatus() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return passwordChangerService.getCardDetails();
+        this.mainCardHandle = passwordChangerService.getCard();
+        return passwordChangerService.getCardDetails(mainCardHandle);
     }
 
 
