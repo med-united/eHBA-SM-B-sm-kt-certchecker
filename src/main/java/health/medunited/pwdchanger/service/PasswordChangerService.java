@@ -30,29 +30,6 @@ public class PasswordChangerService {
         return "hola";
     }
 
-    public String getCert() {
-        //called from URLResource
-
-        /* intialization */
-        String endpoint = "http://localhost/cardservice";
-        ContextType contextType = new ContextType();
-        contextType.setMandantId("Mandant1");
-        contextType.setWorkplaceId("Workplace1");
-        contextType.setClientSystemId("ClientID1");
-        TrustManager trustManager = new FakeX509TrustManager();
-        HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
-
-        certificateServicePort = new CertificateServicePort(
-                endpoint,
-                contextType,
-                trustManager,
-                hostnameVerifier
-        );
-        /* end of intialization */
-
-        String sth = certificateServicePort.readCard();
-        return sth;
-    }
 
     public String getCard() {
 

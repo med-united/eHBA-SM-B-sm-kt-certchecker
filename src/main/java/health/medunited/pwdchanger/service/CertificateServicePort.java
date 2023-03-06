@@ -62,15 +62,12 @@ public class CertificateServicePort {
         Holder<X509DataInfoListType> certList = new Holder<>();
 
         try {
-            System.out.println("trying...");
+            // The following line is failing:
             this.certificateServicePortType
                     .readCardCertificate(cardHandle, context, certRefList, status, certList);
-            System.out.println("read correctly");
-            return "part1";
+            return "The system was able to read the certificate";
         } catch (Error | Exception e) {
-            System.out.println("Error attempting to read certificate:");
-            System.out.println(e);
-            return "part2";
+            return "The system threw an error while trying to read the certificate: \n\n"+e;
         }
         //return "intel inside";
     }

@@ -22,29 +22,27 @@ public class CertificateReadService {
         System.out.println("Constructor of CertRead");
     }
 
-    public String readCardCertificate() {
+    public String getCert() {
+        //called from URLResource
 
-        //TODO: create a provider that is able to construct the context type from http headers automatically
+        /* intialization */
+        String endpoint = "http://localhost/cardservice";
         ContextType contextType = new ContextType();
         contextType.setMandantId("Mandant1");
         contextType.setWorkplaceId("Workplace1");
         contextType.setClientSystemId("ClientID1");
-
-        //TODO: at the end we must not use a fake verifier
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
 
-        //TODO: the correct EventServicePort should be automatically injected7
-
-        //TODO: In order to discover the endpoints on the connector, parse the connector.sds file
-        certificateServicePort = new CertificateServicePort("http://localhost/cardservice", contextType, trustManager, hostnameVerifier);
-        ReadCardCertificateResponse cardResp = certificateServicePort.readCardCertificate(
+        certificateServicePort = new CertificateServicePort(
+                endpoint,
                 contextType,
-                certificateServicePort.getCardHandle(),
-                certificateServicePort.getCertRefList()
+                trustManager,
+                hostnameVerifier
         );
-        return "end";
-        //return String.valueOf(cardResp);
+        /* end of intialization */
 
+        String returnMessage = certificateServicePort.readCard();
+        return returnMessage;
     }
 }

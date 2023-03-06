@@ -61,7 +61,7 @@ public class URLResource {
         System.out.println(" ");
         System.out.println("Inside Resource File");
 
-        return passwordChangerService.getCert();
+        return certificateReadService.getCert();
         //return certificateReadService.readCardCertificate();
     }
 
