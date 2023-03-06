@@ -71,7 +71,7 @@ public class URLResource {
     public String checkCertificate() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return certificateVerifyService.verifyCert();
+        return certificateVerifyService.verifyCertificateFromPort();
     }
 
 }

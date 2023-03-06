@@ -16,31 +16,37 @@ import javax.net.ssl.TrustManager;
 public class CertificateVerifyService {
 
     CertificateServicePort certificateServicePort;
+    ReadCardCertificateResponse readCardCertificateResponse;
 
     @Inject
     public void CertificateVerifyService() {
         System.out.println("Constructor of CertVerify");
     }
 
-    public String verifyCert() {
+    public String verifyCertificateFromPort() {
+        //called from URLResource
 
-        //TODO: create a provider that is able to construct the context type from http headers automatically
+        /* intialization */
+        String endpoint = "http://localhost/certificateservice";
         ContextType contextType = new ContextType();
         contextType.setMandantId("Mandant1");
         contextType.setWorkplaceId("Workplace1");
         contextType.setClientSystemId("ClientID1");
-
-        //TODO: at the end we must not use a fake verifier
         TrustManager trustManager = new FakeX509TrustManager();
         HostnameVerifier hostnameVerifier = new FakeHostnameVerifier();
 
-        //TODO: the correct EventServicePort should be automatically injected7
+        certificateServicePort = new CertificateServicePort(
+                endpoint,
+                contextType,
+                trustManager,
+                hostnameVerifier
+        );
+        /* end of intialization */
 
-        //TODO: In order to discover the endpoints on the connector, parse the connector.sds file
-        certificateServicePort = new CertificateServicePort("http://localhost/cardservice", contextType, trustManager, hostnameVerifier);
-        ReadCardCertificateResponse cardResp = certificateServicePort.verifyCertificate();
-        return String.valueOf(cardResp);
+        readCardCertificateResponse = certificateServicePort.doReadCardCertificate();
 
+        String returnMessage = readCardCertificateResponse.getX509DataInfoList().toString();
+        return returnMessage;
     }
 
 
