@@ -57,12 +57,18 @@ public class CertificateReadService {
 
         readCardCertificateResponse = certificateServicePort.doReadCardCertificate(mnCardHandle);
 
-        InputStream bayIS = new ByteArrayInputStream(
-                readCardCertificateResponse
-                        .getX509DataInfoList().getX509DataInfo().get(0)
-                        .getX509Data().getX509Certificate()
-        );
+        InputStream bayIS = null;
 
+        try {
+            bayIS = new ByteArrayInputStream(
+                    readCardCertificateResponse
+                            .getX509DataInfoList().getX509DataInfo().get(0)
+                            .getX509Data().getX509Certificate()
+            );
+        } catch (Exception e) {
+            System.out.println("Error. No certificate Input Stream." +
+                    "\n\n\nPossible cause: NO VALID CARD INSERTED INTO KOPS \n\n\n"+e);
+        }
         try {
             CertificateFactory certFactory = CertificateFactory
                     .getInstance("X.509", BouncyCastleProvider.PROVIDER_NAME);
@@ -72,9 +78,13 @@ public class CertificateReadService {
             System.out.println("Error reading the cert from the server");
         }
 
-        String returnMessage = x509Certificate.toString();
+        String returnMessage = "The certificate could not be extracted. See other errors in the Terminal";
+        if (x509Certificate != null) {
+            returnMessage = x509Certificate.toString();
+            return "The certificate is: \n\n:"+returnMessage;
+        } else return returnMessage;
 
-        return "The certificate is: \n\n:"+returnMessage;
+
     }
 
     public String verifyCertificateFromPort(X509Certificate theCert) {

@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Holder;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.security.NoSuchProviderException;
 import java.security.Security;
@@ -84,20 +85,19 @@ public class CertificateServicePort {
         certRefList = new ReadCardCertificate.CertRefList();
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
 
-        try {
-            //InputStream was added by myself
-            InputStream is = new FileInputStream("cacert.crt");
-            CertificateFactory certFactory = CertificateFactory.getInstance("X.509", BouncyCastleProvider.PROVIDER_NAME);
-            x509Certificate = (X509Certificate) certFactory.generateCertificate(is);
-            System.out.println("certFactory initialized correctly: "+certFactory.toString());
-            System.out.println("generated x509Cert: "+x509Certificate.toString());
-        } catch (Exception e) {
-            System.out.println("There has been an error with the Certificates Intialization: \n"+e);
-        }
     }
 
 
     String doVerifyCertificate(X509Certificate theC) {
+
+        try {
+            System.out.println("TBSCERT" +theC.getTBSCertificate());
+            System.out.println("ENCODED" +theC.getEncoded());
+            System.out.println("SIGNATURE" +theC.getSignature());
+            System.out.println("SIGALGPARAM" +theC.getSigAlgParams());
+        } catch(Exception e) {
+            System.out.println("ENCODING ERROR OF THE CERT: "+e);
+        }
 
         String answer = "No certificate processing yet";
 

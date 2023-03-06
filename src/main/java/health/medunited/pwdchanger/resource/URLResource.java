@@ -54,7 +54,8 @@ public class URLResource {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        System.out.println(" ");
+        System.out.println("\n\n\nBEGGINIG OF EXECUTION \n\n\n");
+
         System.out.println("Inside Resource File");
 
         return certificateReadService.getCardCertificateFromPort(mainCardHandle);
@@ -68,6 +69,8 @@ public class URLResource {
 
         System.out.print("\033[H\033[2J");
         System.out.flush();
+
+        System.out.println("\n\n\nBEGGINIG OF EXECUTION \n\n\n");
 
         System.out.println(" ");
         System.out.println("Inside Resource File");
