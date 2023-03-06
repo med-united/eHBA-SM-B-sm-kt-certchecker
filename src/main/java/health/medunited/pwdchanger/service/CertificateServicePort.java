@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Holder;
 
+import java.io.FileInputStream;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.cert.CertificateException;
@@ -52,16 +53,11 @@ public class CertificateServicePort {
 
     CertificateServicePortType certificateServicePortType;
 
-    /* doVerifyCertificate */
-    CertificateServicePortType certificateService;
     ContextType contextType;
-    /* doVerifyCertificate */
 
-    ContextType context;
+    String cardHandle = "f43be851-42c4-4aad-b603-9c2f9e2f94e3";
 
-    String cardHandle = "f43be851-42c4-4aad-b603-9c2f9e2f94e3";//new
-
-    ReadCardCertificate readCardCertificate;
+    X509Certificate x509Certificate;
 
     ReadCardCertificate.CertRefList certRefList;
 
@@ -70,13 +66,13 @@ public class CertificateServicePort {
     }
 
     public CertificateServicePort(String endpoint, ContextType context, TrustManager trustManager, HostnameVerifier hostnameVerifier) {
-        this.context = context;
+        this.contextType = context;
         try {
             certificateServicePortType = new CertificateService(
                     getClass()
                     .getResource("/CertificateService_v6_0_1.wsdl"))
                     .getCertificateServicePort();
-            System.out.println("cspt initialized correctly");
+            System.out.println("certificateServicePort initialized correctly: "+certificateServicePortType.toString());
         } catch(Exception e) {
             System.out.println("Catching cspt initialization: ");
             System.out.println(e);
@@ -89,12 +85,48 @@ public class CertificateServicePort {
         certRefList.getCertRef().add(CertRefEnum.C_AUT);
 
         try {
+            //InputStream was added by myself
+            InputStream is = new FileInputStream("cacert.crt");
             CertificateFactory certFactory = CertificateFactory.getInstance("X.509", BouncyCastleProvider.PROVIDER_NAME);
-            //X509Certificate z = (X509Certificate) certFactory;
+            x509Certificate = (X509Certificate) certFactory.generateCertificate(is);
+            System.out.println("certFactory initialized correctly: "+certFactory.toString());
+            System.out.println("generated x509Cert: "+x509Certificate.toString());
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("There has been an error with the Certificates Intialization: \n"+e);
         }
     }
+
+
+    String doVerifyCertificate(X509Certificate theC) {
+
+        String answer = "No certificate processing yet";
+
+        Holder<Status> status = new Holder<>();
+        Holder<VerifyCertificateResponse.VerificationStatus> verificationStatus = new Holder<>();
+        Holder<VerifyCertificateResponse.RoleList> arg5 = new Holder<>();
+        XMLGregorianCalendar now = null;
+        try {
+            now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar(TimeZone.getTimeZone("UTC")));
+            System.out.println("Creating a timestamp for 'now'");
+        } catch (DatatypeConfigurationException e) {
+            System.out.println("Failed to create timestamp for vertification: "+ e);
+            answer = "Initial timestamp creation system error";
+        }
+        try {
+            certificateServicePortType.verifyCertificate(contextType, theC.getEncoded(), now, status, verificationStatus, arg5);
+            System.out.println("Core verification process in progress...");
+        } catch (Exception e) {
+            System.out.println("Core verification process has failed with error: "+e);
+            answer = "Core Verification Proecess system error";
+        }
+        if(verificationStatus.value.getVerificationResult() != VerificationResultType.VALID) {
+            System.out.println("Error: Verification process finished. Result Status: "
+            +verificationStatus.value.getVerificationResult());
+            answer = "Certifiate was checked. Result: "+verificationStatus.value.getVerificationResult();
+        }
+        return answer;
+    }
+
 
     public ReadCardCertificateResponse doReadCardCertificate() {
         System.out.println("Inside readCard");
@@ -105,14 +137,14 @@ public class CertificateServicePort {
             log.fine(certificateServicePortType.toString());
             // The following line is failing:
             this.certificateServicePortType
-                    .readCardCertificate(cardHandle, context, certRefList, status, certList);
+                    .readCardCertificate(cardHandle, contextType, certRefList, status, certList);
 
             ReadCardCertificateResponse readCardCertificateResponse = new ReadCardCertificateResponse();
 
             readCardCertificateResponse.setStatus(status.value);
             readCardCertificateResponse.setX509DataInfoList(certList.value);
 
-            System.out.println("Certificate read correctly:"+
+            System.out.println("Certificate read correctly: "+
                     readCardCertificateResponse.getX509DataInfoList());
 
             return readCardCertificateResponse;
@@ -122,57 +154,6 @@ public class CertificateServicePort {
             return null;
         }
         //return "intel inside";
-    }
-
-    void doVerifyCertificate(X509Certificate z) {
-
-        String fachdienstUrl = "http://localhost";
-
-        Holder<Status> status = new Holder<>();
-        Holder<VerifyCertificateResponse.VerificationStatus> verificationStatus = new Holder<>();
-        Holder<VerifyCertificateResponse.RoleList> arg5 = new Holder<>();
-        XMLGregorianCalendar now = null;;
-        try {
-            now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar(TimeZone.getTimeZone("UTC")));
-        } catch (DatatypeConfigurationException e) {
-            throw new IllegalStateException("Can not verify certificate from VAU", e);
-        }
-        try {
-            certificateService.verifyCertificate(contextType, z.getEncoded(), now, status, verificationStatus, arg5);
-        } catch (Exception e) {
-            throw new IllegalStateException("Can not verify certificate from VAU", e);
-        }
-        if(verificationStatus.value.getVerificationResult() != VerificationResultType.VALID) {
-            throw new IllegalStateException("VAU certificate is not valid");
-        }
-
-        // Code based on: https://github.com/apache/nifi/blob/master/nifi-nar-bundles/nifi-framework-bundle/nifi-framework/nifi-web/nifi-web-security/src/main/java/org/apache/nifi/web/security/x509/ocsp/OcspCertificateValidator.java#L278
-        InputStream ocspResponseStream;
-        BasicOCSPResp basicOcspResponse;
-        try {
-            ocspResponseStream = new URL(fachdienstUrl + "/VAUCertificateOCSPResponse").openStream();
-            OCSPResp oCSPResp = new OCSPResp(ocspResponseStream);
-            basicOcspResponse = (BasicOCSPResp) oCSPResp.getResponseObject();
-        } catch (IOException | OCSPException e2) {
-            throw new IllegalArgumentException("Could not parse OCSP response", e2);
-        }
-
-        BigInteger subjectSerialNumber = z.getSerialNumber();
-        // validate the response
-        final SingleResp[] responses = basicOcspResponse.getResponses();
-        for (SingleResp singleResponse : responses) {
-            final CertificateID responseCertificateId = singleResponse.getCertID();
-            final BigInteger responseSerialNumber = responseCertificateId.getSerialNumber();
-
-            if (responseSerialNumber.equals(subjectSerialNumber)) {
-                Object certStatus = singleResponse.getCertStatus();
-
-                // interpret the certificate status
-                if (certStatus instanceof RevokedStatus) {
-                    throw new IllegalStateException("VAU certificate status is revoked");
-                }
-            }
-        }
     }
 
 
@@ -185,7 +166,7 @@ public class CertificateServicePort {
     }
 
     public ContextType getContext() {
-        return context;
+        return contextType;
     }
 
     public String getCardHandle() {

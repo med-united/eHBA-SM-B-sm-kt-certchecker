@@ -1,14 +1,10 @@
 package health.medunited.pwdchanger.resource;
-import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
 import health.medunited.pwdchanger.service.CertificateReadService;
-import health.medunited.pwdchanger.service.CertificateVerifyService;
-import health.medunited.pwdchanger.service.EventServicePort;
 import health.medunited.pwdchanger.service.PasswordChangerService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
 
 
 @Path("/")
@@ -16,9 +12,6 @@ public class URLResource {
 
     @Inject
     PasswordChangerService passwordChangerService;
-
-    @Inject
-    CertificateVerifyService certificateVerifyService;
 
     @Inject
     CertificateReadService certificateReadService;
@@ -69,9 +62,16 @@ public class URLResource {
     @Path("/verifyCert")
     @Produces(MediaType.TEXT_PLAIN)
     public String checkCertificate() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return certificateVerifyService.verifyCertificateFromPort();
+
+        certificateReadService.getCardCertificateFromPort();
+
+        return certificateReadService.verifyCertificateFromPort(certificateReadService.getX509Certificate());
     }
 
 }
