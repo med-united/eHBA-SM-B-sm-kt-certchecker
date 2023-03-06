@@ -1,8 +1,5 @@
 package health.medunited.pwdchanger.resource;
-import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
 import health.medunited.pwdchanger.service.CertificateReadService;
-import health.medunited.pwdchanger.service.CertificateVerifyService;
-import health.medunited.pwdchanger.service.EventServicePort;
 import health.medunited.pwdchanger.service.PasswordChangerService;
 
 import javax.inject.Inject;
@@ -17,10 +14,9 @@ public class URLResource {
     PasswordChangerService passwordChangerService;
 
     @Inject
-    CertificateVerifyService certificateVerifyService;
-
-    @Inject
     CertificateReadService certificateReadService;
+
+    String mainCardHandle;
 
     @POST
     @Path("/changePIN")
@@ -37,7 +33,8 @@ public class URLResource {
     public String getPinInfo() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return passwordChangerService.getCard();
+        this.mainCardHandle = passwordChangerService.getCard();
+        return mainCardHandle;
     }
 
     @GET
@@ -54,18 +51,33 @@ public class URLResource {
     @Path("/readCert")
     @Produces(MediaType.TEXT_PLAIN)
     public String readCertificate() {
-        System.out.println(" ");
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        System.out.println("\n\n\nBEGGINIG OF EXECUTION \n\n\n");
+
         System.out.println("Inside Resource File");
-        return certificateReadService.readCardCertificate();
+
+        return certificateReadService.getCardCertificateFromPort(mainCardHandle);
+        //return certificateReadService.readCardCertificate();
     }
 
     @GET
     @Path("/verifyCert")
     @Produces(MediaType.TEXT_PLAIN)
     public String checkCertificate() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        System.out.println("\n\n\nBEGGINIG OF EXECUTION \n\n\n");
+
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return certificateVerifyService.verifyCert();
+
+        certificateReadService.getCardCertificateFromPort(passwordChangerService.getCard());
+
+        return certificateReadService.verifyCertificateFromPort(certificateReadService.getX509Certificate());
     }
 
 }

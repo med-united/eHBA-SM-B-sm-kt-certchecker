@@ -41,6 +41,20 @@ and NOT as URL Parameters
 In the above folder there are a few .java files that have test-functions which can be run inside of IntelliJ
 To do this highlight the corresponding function, insert a breakpoint at the end and press debug.
 
+# Execution
 
+Please run the program in the following 3 steps in the exact sequence given here
+
+````
+http://localhost:8080/getCard
+http://localhost:8080/readCert
+http://localhost:8080/verifyCert
+````
+
+Please follow the output in 3 places for debugging and status messages
+
+* In the Terminal
+* In the KoPS Window
+* In the Browser
 
 

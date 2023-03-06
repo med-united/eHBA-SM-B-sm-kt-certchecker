@@ -1,6 +1,8 @@
 package health.medunited.pwdchanger.service;
 
 import de.gematik.ws.conn.cardservicecommon.v2.CardTypeType;
+import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificate;
+import de.gematik.ws.conn.certificateservice.v6.ReadCardCertificateResponse;
 import health.medunited.pwdchanger.model.gematik.ChangePinResponse;
 import health.medunited.pwdchanger.model.gematik.GetPinStatusResponse;
 import health.medunited.pwdchanger.security.FakeHostnameVerifier;
@@ -17,6 +19,7 @@ public class PasswordChangerService {
 
     EventServicePort eventServicePort;
     CardServicePort cardServicePort;
+    CertificateServicePort certificateServicePort;
 
     @Inject
     public void PasswordChangerService() {
@@ -26,6 +29,7 @@ public class PasswordChangerService {
     public String setSomething() {
         return "hola";
     }
+
 
     public String getCard() {
 
