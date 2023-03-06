@@ -16,6 +16,8 @@ public class URLResource {
     @Inject
     CertificateReadService certificateReadService;
 
+    String mainCardHandle;
+
     @POST
     @Path("/changePIN")
     @Produces(MediaType.TEXT_PLAIN)
@@ -31,7 +33,8 @@ public class URLResource {
     public String getPinInfo() {
         System.out.println(" ");
         System.out.println("Inside Resource File");
-        return passwordChangerService.getCard();
+        this.mainCardHandle = passwordChangerService.getCard();
+        return mainCardHandle;
     }
 
     @GET
@@ -54,7 +57,7 @@ public class URLResource {
         System.out.println(" ");
         System.out.println("Inside Resource File");
 
-        return certificateReadService.getCardCertificateFromPort();
+        return certificateReadService.getCardCertificateFromPort(mainCardHandle);
         //return certificateReadService.readCardCertificate();
     }
 
@@ -69,7 +72,7 @@ public class URLResource {
         System.out.println(" ");
         System.out.println("Inside Resource File");
 
-        certificateReadService.getCardCertificateFromPort();
+        certificateReadService.getCardCertificateFromPort(passwordChangerService.getCard());
 
         return certificateReadService.verifyCertificateFromPort(certificateReadService.getX509Certificate());
     }

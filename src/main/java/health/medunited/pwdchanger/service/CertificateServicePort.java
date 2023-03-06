@@ -55,7 +55,7 @@ public class CertificateServicePort {
 
     ContextType contextType;
 
-    String cardHandle = "f43be851-42c4-4aad-b603-9c2f9e2f94e3";
+    String cardHandle;
 
     X509Certificate x509Certificate;
 
@@ -128,7 +128,8 @@ public class CertificateServicePort {
     }
 
 
-    public ReadCardCertificateResponse doReadCardCertificate() {
+    public ReadCardCertificateResponse doReadCardCertificate(String mnCardHandle) {
+        this.cardHandle = mnCardHandle;
         System.out.println("Inside readCard");
         Holder<Status> status = new Holder<>();
         Holder<X509DataInfoListType> certList = new Holder<>();
@@ -137,7 +138,7 @@ public class CertificateServicePort {
             log.fine(certificateServicePortType.toString());
             // The following line is failing:
             this.certificateServicePortType
-                    .readCardCertificate(cardHandle, contextType, certRefList, status, certList);
+                    .readCardCertificate(mnCardHandle, contextType, certRefList, status, certList);
 
             ReadCardCertificateResponse readCardCertificateResponse = new ReadCardCertificateResponse();
 

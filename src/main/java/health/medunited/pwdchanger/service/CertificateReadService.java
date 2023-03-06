@@ -35,7 +35,7 @@ public class CertificateReadService {
         System.out.println("Constructor of CertRead");
     }
 
-    public String getCardCertificateFromPort() {
+    public String getCardCertificateFromPort(String mnCardHandle) {
         //called from URLResource
 
         /* intialization */
@@ -55,7 +55,7 @@ public class CertificateReadService {
         );
         /* end of intialization */
 
-        readCardCertificateResponse = certificateServicePort.doReadCardCertificate();
+        readCardCertificateResponse = certificateServicePort.doReadCardCertificate(mnCardHandle);
 
         InputStream bayIS = new ByteArrayInputStream(
                 readCardCertificateResponse
@@ -99,8 +99,6 @@ public class CertificateReadService {
 
         //readCardCertificateResponse = certificateServicePort.doReadCardCertificate();
 
-        String returnMessage = certificateServicePort.doVerifyCertificate(theCert);
-
-        return returnMessage;
+        return certificateServicePort.doVerifyCertificate(theCert);
     }
 }
